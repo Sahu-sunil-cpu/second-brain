@@ -54,9 +54,11 @@ route.post("/addContent", authMiddleware, async (req, res) => {
   const userId = req.userId;
 
 
-  const { Link, title, type, tag} = req.body;
+  const { Link, title, type, description} = req.body;
 
-  console.log(Link, title, type,tag )
+  console.log(Link, title, type,description )
+
+ 
 
 
   try {
@@ -65,7 +67,7 @@ route.post("/addContent", authMiddleware, async (req, res) => {
       title,
       type,
       Link,
-      tag,
+      description,
     })
 
     res.send("content added");

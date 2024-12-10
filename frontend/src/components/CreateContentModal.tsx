@@ -17,7 +17,7 @@ const colors = ["red", "yellow", "green", "amber", "orange", "blue", "lime", "cy
 export function CreateContentModal({ open, onClose, onContentadd }: { open: boolean, onClose: () => void, onContentadd: () => void }) {
   const titleRef = useRef<HTMLInputElement>();
   const linkRef = useRef<HTMLInputElement>();
-  const [tag, setTag] = useState<string>();
+ const descriptionRef = useRef<HTMLInputElement>();
   const [type, setType] = useState<string>();
 
 
@@ -25,6 +25,8 @@ export function CreateContentModal({ open, onClose, onContentadd }: { open: bool
 
     const title = titleRef.current?.value;
     const Link = linkRef.current?.value;
+    const description = descriptionRef.current?.value;
+    console.log(description)
    
     // console.log(titleRef.current?.value)
     // console.log(linkRef.current?.value)
@@ -33,7 +35,7 @@ export function CreateContentModal({ open, onClose, onContentadd }: { open: bool
       title,
       Link,
       type,
-      tag
+      description,
 
     }, {
       headers: {
@@ -64,7 +66,7 @@ export function CreateContentModal({ open, onClose, onContentadd }: { open: bool
 
           </div>
           <div className="">
-            <Input titleref={titleRef} linkref={linkRef} setType={setType} setTag={setTag} addContent={addContent} />
+            <Input titleref={titleRef} linkref={linkRef} setType={setType} descriptionRef={descriptionRef} addContent={addContent} />
           </div>
         </span>
 
@@ -79,11 +81,11 @@ export function CreateContentModal({ open, onClose, onContentadd }: { open: bool
 }
 
 
-function Input({ linkref, titleref, addContent, setType, setTag }: {
+function Input({ linkref, titleref, addContent, setType, descriptionRef}: {
   linkref: any,
   titleref: any,
   setType: any,
-  setTag: any,
+  descriptionRef: any,
 
   addContent: () => void,
 }) {
@@ -114,21 +116,27 @@ function Input({ linkref, titleref, addContent, setType, setTag }: {
 
     </div>
 
-    <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Choose tags for link</label>
-
-    <Tags tag={tags}  setTag={setTag}/>
-
-
+    <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
+    <textarea id="message"  ref={descriptionRef}rows={4} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="e.g. this photo is my favorite cat photo and i will buy her soon ..."></textarea>
+   
 
 
 
-    <button onClick={addContent} type="submit" className="opacity-100 text-black bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+
+
+    <button onClick={addContent} type="submit" className="opacity-100 text-black bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2">Submit</button>
   </form>
 
 }
 
 
-const tags = ["productivity", "health", "note", "reminder", "looks good", "future", "pending", "reading", "guide"]
+function Textarea({}) {
+  return <div>
+  
+  </div>
+}
+
+
 
 
 

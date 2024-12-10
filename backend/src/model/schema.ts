@@ -41,7 +41,7 @@ const contentSchema = new Schema({
     // tag: {
     //     type: Types.ObjectId, ref: 'Tag'
     // },
-    tag: {
+    description: {
         type: String,
         require: true
     },

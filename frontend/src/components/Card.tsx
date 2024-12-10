@@ -6,7 +6,7 @@ import Button from "./Button";
 type CardVariant = "primary" | "secondary";
 interface CardProps {
     title: string,
-    tag: string,
+    description: string,
     image?: string,
     type: string,
     deleteFunction?: () => void,
@@ -93,19 +93,19 @@ export default function Card(props: CardProps) {
                             </div>
                             <div className="col-span-3">
                                 <div className="grid grid-rows-3 grid-flow-col gap-1">
-                                    <div className="ml-2 font-medium text-lg row-span-1">
+                                    <div className="ml-2 font-medium text-lg row-span-1 max-w-56">
                                         {props.title}
                                     </div>
 
-                                    <div className="row-span-2">
-                                        my name is sunil sahu i am from sikandrabad
-                                        my father name is prabhulit kumar sahu and mothers name is malti devi
+                                    <div className="row-span-2 max-w-60">
+                                        
+                                      <p className="">{props.description}</p> 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="row-span-1">
+                    <div className="row-span-1 my-auto">
                         <Button size="md" variant="tertiary" text="Delete" onClick={props.deleteFunction} />
                         <Button size="md" variant="secondary" text="Edit" />
 
