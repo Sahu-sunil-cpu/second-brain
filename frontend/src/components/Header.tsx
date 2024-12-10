@@ -27,17 +27,15 @@ export default function Header({ onOpen }: { onOpen: () => void }) {
    
    
   }
-  return (
-    <>
-
-
-      <div className=''>
+  return <div className=' flex  justify-between items-center'>
        
 
-        <div className='flex  justify-end pt-4 pr-8 pb-8 '>
-           <div className="relative right-96">
+        <div className='flex  justify-between pt-4 pr-8 pb-8 '>
+           <div className="mr-44">
           <SearchBar/>
           </div>
+
+
           <Button size={"md"}
             variant={"primary"}
             text={"Add Content"}
@@ -60,7 +58,6 @@ export default function Header({ onOpen }: { onOpen: () => void }) {
         </div>
      
 
-    </>
-  )
+ 
 
 }

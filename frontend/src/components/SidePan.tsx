@@ -25,7 +25,7 @@ const Logout = () => {
     return (
         <>
 
-            <span className="flex h-screen min-w-72  flex-col bg-white p-4 shadow-md rounded-xl fixed top-0 left-0 justify-evenly">
+            <span className="flex h-screen min-w-72 flex-col bg-white p-4 shadow-md rounded-r-xl fixed top-0 left-0    justify-evenly">
                 <div className="mb-20">
             <Logo name='Second Brain' size='sm' />
             </div>

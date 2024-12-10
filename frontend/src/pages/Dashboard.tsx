@@ -3,51 +3,107 @@
 
 import SidePan from '../components/SidePan'
 import Header from '../components/Header'
-import ContentCard from '../components/ContentCard'
+//import ContentCard from '../components/ContentCard'
 import { CreateContentModal } from '../components/CreateContentModal'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BACKEND_URL } from '../Config'
+import Card from '../components/Card'
 
 
-function Dashboard() {
+function Dashboard({contentAdded, OnContentAdded} : {contentAdded: boolean, OnContentAdded: () => void}) {
 
- const [ contentAdded, setContentAdded] = useState(false);
-
-  const [ modalOpen, setModalOpen] = useState(false);
-
-  const [endpoint, setEndpoint] = useState("contents")
-
-return (
-  <>
-<CreateContentModal open={modalOpen}  onClose={ () => {
-  setModalOpen(false)
-}}  onContentadd={() => {
-    setContentAdded(true)
-}} />
-<div className="container bg-gray-100 mx-auto">
-  <Header onOpen={ () => {
-  setModalOpen(true)
-}}/>
-
-<div className='grid grid-cols-5 gap-4'>
+  
 
 
-  <div className='col-span-1 '>
-  <SidePan setEndpoint={setEndpoint}/>
-  </div>
 
-  <div className='col-span-4 '>
-  <ContentCard ContentAdded={contentAdded} Endpoint={endpoint} onContentadd={() => {
-    setContentAdded(false)
-}}/>
-  </div>
-  </div>
-  </div>
+  const [Loading, setLoading] = useState(true);
+  const [contents, setContents] = useState([]);
 
-  </>
-)
- 
+
+
+  
+
+
+
+  const getContent = async () => {
+    if (contentAdded == true || Loading == true) {
+      const res = await axios.get(`${BACKEND_URL}/v1/secondBrain/contents`, {
+        headers: {
+          "Authorization": localStorage.getItem("token")
+        }
+      })
+
+      console.log(res)
+      //console.log(Endpoint)
+      OnContentAdded();
+      setLoading(false);
+      setContents(res.data);
+      console.log(contents)
+    }
+
+  }
+
+  useEffect(() => {
+    getContent()
+  }, [contentAdded, Loading])
+
+
+  const deleteContent = async (id: string) => {
+    const res = await axios.delete(`${BACKEND_URL}/v1/secondBrain/deleteContent`, {
+      data: {
+        id
+      },
+      headers: {
+        "Authorization": localStorage.getItem("token")
+
+
+      }
+
+
+    })
+
+    console.log(res)
+
+    setLoading(true);
+
+
+  }
+
+  if (Loading) {
+    return <div className="flex justify-center items-center mt-40">
+      <iframe src="https://lottie.host/embed/bbbe7b8f-1ffe-4627-9086-e9c556403b72/uJN3D0wOvR.lottie"></iframe>
+    </div>
+  }
+
+  return (
+    <>
+
+      <div className="flex  flex-row flex-wrap p-4 inline-block rounded-xl justify-center items-center ">
+
+
+        {
+          contents.map(({ type, Link, title, tag, _id }: {
+            type: string,
+            Link: string,
+            title: string,
+            _id: string,
+            tag: string
+          }) =>
+            <span className="py-8 px-4" >
+              <Card deleteFunction={() => deleteContent(_id.toString())} title={title} type={type} size='lg' variant='primary' tag={tag} image={Link} />
+            </span>
+          )
+        }
+
+
+
+
+
+
+      </div>
+    </>
+  )
 }
 
 export default Dashboard;

@@ -1,5 +1,5 @@
-///  error handling is remaining
-
+/// error handling is remaining
+// neeed more optyimization regarding security and performance
 
 
 import jwt from 'jsonwebtoken'
@@ -232,6 +232,77 @@ route.post("/share", authMiddleware, async (req, res) => {
 })
 
 
+
+/**
+ * 
+ * make it more cleaner, instead of adding each routes for contents, optimize it in one from your skills
+ */
+route.get("/content/video", authMiddleware, async (req, res) => {
+
+
+
+  try {
+    const videos = await contentModel.find({type: "video"})
+        console.log(videos)
+    res.json(videos);
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+
+  }
+
+})
+
+route.get("/content/document", authMiddleware, async (req, res) => {
+
+
+
+  try {
+    const videos = await contentModel.find({type: "document"})
+        console.log(videos)
+    res.json(videos);
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+
+  }
+
+})
+
+
+
+route.get("/content/tweet", authMiddleware, async (req, res) => {
+
+
+
+  try {
+    const videos = await contentModel.find({type: "tweet"})
+        console.log(videos)
+    res.json(videos);
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+
+  }
+
+})
+
+route.get("/content/link", authMiddleware, async (req, res) => {
+
+
+
+  try {
+    const videos = await contentModel.find({type: "link"})
+        console.log(videos)
+    res.json(videos);
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+
+  }
+
+})
+
 route.get("/:shareLink", async (req, res) => {
   const { shareLink } = req.params;
 
@@ -248,3 +319,5 @@ route.get("/:shareLink", async (req, res) => {
 
 
 })
+
+
