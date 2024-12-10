@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 
 
 interface ButtonProps {
-  variant: "primary" | "secondary" | "success";
+  variant: "primary" | "secondary" | "success" | "tertiary";
   size: "lg" | "md" | "sm";
   text: string;
   onClick?: () => void;
@@ -11,8 +11,9 @@ interface ButtonProps {
 }
 
  const ButtonVariants = {
- "primary": "border-black bg-purple-300 text-white text-white  ",
+ "primary": "border-black bg-purple-300 text-white  ",
  "secondary": "bg-purple-200 text-purple-400",
+ "tertiary": "bg-white-300 text-white-200 shadow-md border hover:bg-white-400",
  "success": "border-purple-600 border bg-purple-200 text-purple-600"
 }
 

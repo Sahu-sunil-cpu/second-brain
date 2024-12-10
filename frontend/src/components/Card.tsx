@@ -1,6 +1,7 @@
 import { Tab } from "./Tab";
 import { DocIcon, LinkIcon, TweetIcon, VideoIcon, DeleteIcon } from "./Icon/Tab-Icon/TabIcons";
 import { ShareIcon } from "./Icon/Button-Icon/ShareIcon";
+import Button from "./Button";
 
 type CardVariant = "primary" | "secondary";
 interface CardProps {
@@ -17,11 +18,11 @@ interface CardProps {
 const sizeVariant = {
     "sm": "max-h-52 max-w-40 ",
     "md": "h-52 w-44 ",
-    "lg": "h-92 w-80"
+    "lg": "max-h-92 w-80"
 }
 
 const styleVariant = {
-    "primary": "border-2 p-1 border-gray-200 rounded-lg px-2 pb-4 bg-white shadow-md",
+    "primary": "border-2 p-1 border-gray-200 rounded-lg  bg-white shadow-md",
     "secondary": "border-2  border-gray-200 rounded-lg px-2 pb-3 bg-white "
 }
 
@@ -46,7 +47,13 @@ export default function Card(props: CardProps) {
     return <div className={`${styleVariant[props.variant]}`}>
         <span className={`${sizeVariant[props.size]} flex flex-col justify-between items-center`} >
 
-            <div className="flex justify-between w-80 items-center ">
+
+            {/* making tabs for specific type i.e. video, image, doc, tweet so there is no need
+ to add icons anymore
+
+ removing tags and share icon and delete icon into new ui/ux */}
+
+            {/* <div className="flex justify-between w-80 items-center ">
                 <div className="flex  w-80 items-center">
                     {IconFetcher(props.type)}
                     <div className="ml-2 font-medium text-lg">
@@ -75,7 +82,51 @@ export default function Card(props: CardProps) {
 
             <span className="flex justify-start w-80">
                 <div className="bg-blue-100 max-w-28 text-sm rounded-full  p-1 mx-1">{props.tag}</div>
-            </span>
+            </span> */}
+
+            {
+                props.type != "tweet" && <div className="grid grid-rows-4 grid-flow-col gap-3">
+                    <div className="row-span-3">
+                        <div className="grid grid-cols-4 grid-flow-col gap-1">
+                            <div className="col-span-1">
+                                <SelectContent type={props.type} link={props.image || "http://localhost:5173/dashboard"} />
+                            </div>
+                            <div className="col-span-3">
+                                <div className="grid grid-rows-3 grid-flow-col gap-1">
+                                    <div className="ml-2 font-medium text-lg row-span-1">
+                                        {props.title}
+                                    </div>
+
+                                    <div className="row-span-2">
+                                        my name is sunil sahu i am from sikandrabad
+                                        my father name is prabhulit kumar sahu and mothers name is malti devi
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row-span-1">
+                        <Button size="md" variant="tertiary" text="Delete" onClick={props.deleteFunction} />
+                        <Button size="md" variant="secondary" text="Edit" />
+
+                    </div>
+                </div>
+            }
+
+            {
+                props.type == "tweet" && <div className="">
+                    <div className="">
+                        <SelectContent type={props.type} link={props.image || "http://localhost:5173/dashboard"} />
+
+                    </div>
+
+                    <div className="">
+                        <Button size="md" variant="tertiary" text="Delete" onClick={props.deleteFunction} />
+                        <Button size="md" variant="secondary" text="Edit" />
+
+                    </div>
+                </div>
+            }
         </span>
     </div>
 }
@@ -88,7 +139,7 @@ function SelectContent({ type, link }: { type: string, link: string }) {
 
     const getYouTubeVideoId = (url: string) => {
         const videoId = url.split('v=')[1]
-       const ampersandPosition = videoId.indexOf('&')
+        const ampersandPosition = videoId.indexOf('&')
         if (ampersandPosition !== -1) {
             return videoId.substring(0, ampersandPosition)
         }
@@ -96,7 +147,7 @@ function SelectContent({ type, link }: { type: string, link: string }) {
         return videoId
     }
 
-    
+
 
     return <div>
 
@@ -141,13 +192,13 @@ function SelectContent({ type, link }: { type: string, link: string }) {
 
             {
                 type == "document" && <div>
-                    <a href={link}>
-                       <img 
+                    <a href={link} target="_blank">
+                        <img
                             src={`https://www.google.com/s2/favicons?domain=${link}&sz=${128}`} alt="image"
-                            className="min-w-40 rounded-full"
+                            className="max-w-16 min-w-16 "
                         />
 
-{/* <iframe src="https://docs.google.com/document/d/1VbPEobLdg07LJZpXWmFvfrW7heJVPxD09ov0uoHb2LA/edit?tab=t.0#heading=h.kpyv8z1j698z"  frameBorder="0"></iframe> */}
+                        {/* <iframe src="https://docs.google.com/document/d/1VbPEobLdg07LJZpXWmFvfrW7heJVPxD09ov0uoHb2LA/edit?tab=t.0#heading=h.kpyv8z1j698z"  frameBorder="0"></iframe> */}
 
                     </a>
                 </div>
@@ -157,10 +208,10 @@ function SelectContent({ type, link }: { type: string, link: string }) {
 
                 type == "link" && <div>
 
-                    <a href={link}  >
-                        <img 
+                    <a href={link} target="_blank" >
+                        <img
                             src={`https://www.google.com/s2/favicons?domain=${link}&sz=${128}`} alt="image"
-                            className="min-w-40 rounded-full"
+                            className="max-w-16 min-w-16 rounded-md"
                         />
                     </a>
                 </div>

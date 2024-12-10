@@ -11,7 +11,7 @@ export default function NotFound() {
 
 
          <div className="text-3xl">
-            Oops! .. Page Not Found ....
+            Oops! .. Content Not Found ....
          </div>
     </div>
     

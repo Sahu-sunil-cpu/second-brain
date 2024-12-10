@@ -36,7 +36,7 @@ export default function Layout({setContentAdded}: {setContentAdded: any}) {
 
                     <div className="col-span-4">
 
-                        <div className="grid grid-rows-14  gap-4">
+                        <div className="grid grid-rows-15  gap-4">
                             <div className="row-span-1 mx-auto ">
                             <Header onOpen={() => {
                             setModalOpen(true)
@@ -44,7 +44,7 @@ export default function Layout({setContentAdded}: {setContentAdded: any}) {
                             </div>
 
 
-                            <div className="row-span-13">
+                            <div className="row-span-14">
                             <Outlet />
                             </div>
                         

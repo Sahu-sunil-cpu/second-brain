@@ -27,10 +27,10 @@ export default function Header({ onOpen }: { onOpen: () => void }) {
    
    
   }
-  return <div className=' flex  justify-between items-center'>
+  return <div className=' flex  justify-end items-center'>
        
 
-        <div className='flex  justify-between pt-4 pr-8 pb-8 '>
+        <div className='flex  justify-between pt-2  '>
            <div className="mr-44">
           <SearchBar/>
           </div>
