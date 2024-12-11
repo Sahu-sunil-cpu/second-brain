@@ -73,15 +73,15 @@ export default function Document({contentAdded, OnContentAdded} : {contentAdded:
   
   
           {
-            contents.map(({ type, Link, title, tag, _id }: {
+            contents.map(({ type, Link, title, description, _id }: {
               type: string,
               Link: string,
               title: string,
               _id: string,
-              tag: string
+              description: string
             }) =>
               <span className="py-8 px-4" >
-                <Card deleteFunction={() => deleteContent(_id.toString())} title={title} type={type} size='lg' variant='primary' tag={tag} image={Link} />
+                <Card deleteFunction={() => deleteContent(_id.toString())} title={title} type={type} size='lg' variant='primary' description={description} image={Link} />
               </span>
             )
           }

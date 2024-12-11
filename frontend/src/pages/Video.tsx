@@ -74,15 +74,16 @@ export default function Video({contentAdded, OnContentAdded} : {contentAdded: bo
     return   <div className="flex  flex-row flex-wrap p-4 inline-block rounded-xl justify-center items-center ">
   
   
-          { contents != null ?  contents.map(({ type, Link, title, tag, _id }: {
-              type: string,
+          { contents != null ?  contents.map(({ type, Link, title, description, _id }: {
+              description: string,
               Link: string,
               title: string,
               _id: string,
-              tag: string
+              type: string
+
             }) =>
               <span className="py-8 px-4" >
-                <Card deleteFunction={() => deleteContent(_id.toString())} title={title} type={type} size='lg' variant='primary' tag={tag} image={Link} />
+                <Card deleteFunction={() => deleteContent(_id.toString())} title={title} type={type} size='lg' variant='primary' description={description} image={Link} />
               </span>
             ) :
             <div>

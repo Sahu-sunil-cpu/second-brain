@@ -53,37 +53,7 @@ export default function Card(props: CardProps) {
 
  removing tags and share icon and delete icon into new ui/ux */}
 
-            {/* <div className="flex justify-between w-80 items-center ">
-                <div className="flex  w-80 items-center">
-                    {IconFetcher(props.type)}
-                    <div className="ml-2 font-medium text-lg">
-                        {props.title}
-                    </div>
-                </div>
-
-
-
-
-
-                <div className="flex w-16 justify-between">
-                    <ShareIcon size="md" />
-
-                    <div onClick={props.deleteFunction}>
-                        <DeleteIcon size="md" />
-                    </div>
-                </div>
-
-            </div>
-
-
-
-
-            <SelectContent type={props.type} link={props.image || "http://localhost:5173/dashboard"} />
-
-            <span className="flex justify-start w-80">
-                <div className="bg-blue-100 max-w-28 text-sm rounded-full  p-1 mx-1">{props.tag}</div>
-            </span> */}
-
+            
             {
                 props.type != "tweet" && <div className="grid grid-rows-4 grid-flow-col gap-3">
                     <div className="row-span-3">
@@ -98,8 +68,11 @@ export default function Card(props: CardProps) {
                                     </div>
 
                                     <div className="row-span-2 max-w-60">
-                                        
-                                      <p className="">{props.description}</p> 
+                                        {
+                                            props.description ?  <p className="">{props.description}</p> : 
+                                            <div className="text-2xl text-blue-600 mt-8 ml-8">no description!</div>
+                                        }
+                                     
                                     </div>
                                 </div>
                             </div>

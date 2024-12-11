@@ -10,7 +10,7 @@ interface TabProps {
 }
 
 const fontSize = {
-    "sm": "text-base  font-medium ml-3 ",
+    "sm": "text-base  font-normal ml-3 ",
     "md": "text-lg font-semibold ml-3  ",
     "lg": "text-2xl font-bold "
 }
