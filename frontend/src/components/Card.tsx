@@ -2,6 +2,8 @@ import { Tab } from "./Tab";
 import { DocIcon, LinkIcon, TweetIcon, VideoIcon, DeleteIcon } from "./Icon/Tab-Icon/TabIcons";
 import { ShareIcon } from "./Icon/Button-Icon/ShareIcon";
 import Button from "./Button";
+import ContentCard from "./ContentCard";
+import { LinkVisit } from "./Icon/LinkVisit";
 
 type CardVariant = "primary" | "secondary";
 interface CardProps {
@@ -62,25 +64,24 @@ export default function Card(props: CardProps) {
                                 <SelectContent type={props.type} link={props.image || "http://localhost:5173/dashboard"} />
                             </div>
                             <div className="col-span-3">
-                                <div className="grid grid-rows-3 grid-flow-col gap-1">
-                                    <div className="ml-2 font-medium text-lg row-span-1 max-w-56">
-                                        {props.title}
-                                    </div>
-
-                                    <div className="row-span-2 max-w-60">
-                                        {
-                                            props.description ?  <p className="">{props.description}</p> : 
-                                            <div className="text-2xl text-blue-600 mt-8 ml-8">no description!</div>
-                                        }
-                                     
-                                    </div>
-                                </div>
+                                {
+                               <ContentCard title={props.title} description={props.description}/>
+                            //<Video link={props.image || ""} />
+                                }
                             </div>
                         </div>
                     </div>
-                    <div className="row-span-1 my-auto">
+                    <div className="row-span-1 my-auto flex justify-between items-center" >
+                        <div>
                         <Button size="md" variant="tertiary" text="Delete" onClick={props.deleteFunction} />
                         <Button size="md" variant="secondary" text="Edit" />
+                        </div>
+
+                        <div>
+                            <a href={props.image} target="_blank"> 
+                            <LinkVisit size="xl"  />
+                            </a>
+                        </div>
 
                     </div>
                 </div>
@@ -93,7 +94,7 @@ export default function Card(props: CardProps) {
 
                     </div>
 
-                    <div className="">
+                    <div className="row-span-1 my-auto">
                         <Button size="md" variant="tertiary" text="Delete" onClick={props.deleteFunction} />
                         <Button size="md" variant="secondary" text="Edit" />
 
@@ -110,16 +111,7 @@ export default function Card(props: CardProps) {
 
 function SelectContent({ type, link }: { type: string, link: string }) {
 
-    const getYouTubeVideoId = (url: string) => {
-        const videoId = url.split('v=')[1]
-        const ampersandPosition = videoId.indexOf('&')
-        if (ampersandPosition !== -1) {
-            return videoId.substring(0, ampersandPosition)
-        }
-        console.log(videoId)
-        return videoId
-    }
-
+   
 
 
     return <div>
@@ -142,33 +134,15 @@ function SelectContent({ type, link }: { type: string, link: string }) {
 
             }
 
-            {
-
-                type == "video" && <div className="aspect-video mb-4">
-                    <iframe
-                        // ref={videoRef}
-                        width="100%"
-                        height="100%"
-                        src={`https://www.youtube.com/embed/${getYouTubeVideoId(link)}?autoplay=0&rel=0&controls=1&enable`}
-                        title="YouTube video player"
-                        frameBorder="0"
-
-                        allow="accelerometer;  autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    //  allowFullScreen="0"
-
-                    ></iframe>
-                </div>
-
-
-            }
+          
 
 
             {
-                type == "document" && <div>
-                    <a href={link} target="_blank">
+                 <div className="">
+                    <a href={link} target="_blank" className="">
                         <img
                             src={`https://www.google.com/s2/favicons?domain=${link}&sz=${128}`} alt="image"
-                            className="max-w-16 min-w-16 "
+                            className="max-w-16 min-w-16 hover:opacity-85"
                         />
 
                         {/* <iframe src="https://docs.google.com/document/d/1VbPEobLdg07LJZpXWmFvfrW7heJVPxD09ov0uoHb2LA/edit?tab=t.0#heading=h.kpyv8z1j698z"  frameBorder="0"></iframe> */}
@@ -177,25 +151,40 @@ function SelectContent({ type, link }: { type: string, link: string }) {
                 </div>
             }
 
-            {// need to learn how to open link within div
-
-                type == "link" && <div>
-
-                    <a href={link} target="_blank" >
-                        <img
-                            src={`https://www.google.com/s2/favicons?domain=${link}&sz=${128}`} alt="image"
-                            className="max-w-16 min-w-16 rounded-md"
-                        />
-                    </a>
-                </div>
-
-
-
-            }
+           
         </div>
     </div>
 }
 
 
+function Video({link} : {link: string}) {
 
+    const getYouTubeVideoId = (url: string) => {
+        const videoId = url.split('v=')[1]
+        const ampersandPosition = videoId.indexOf('&')
+        if (ampersandPosition !== -1) {
+            return videoId.substring(0, ampersandPosition)
+        }
+        console.log(videoId)
+        return videoId
+    }
+
+    return <div>
+        <div className="aspect-video mb-4 ">
+                    <iframe
+                        // ref={videoRef}
+                        width="100%"
+                        height="100%"
+                        src={`https://www.youtube.com/embed/${getYouTubeVideoId(link)}?autoplay=0&rel=0&controls=1&enable`}
+                        title="YouTube video player"
+                        frameBorder="0"
+                      
+
+                        allow="accelerometer;  autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    //  allowFullScreen="0"
+
+                    ></iframe>
+                </div>
+    </div>
+}
 
