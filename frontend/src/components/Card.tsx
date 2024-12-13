@@ -138,7 +138,7 @@ function SelectContent({ type, link }: { type: string, link: string }) {
 
 
             {
-                 <div className="">
+                type  != "tweet" &&  <div className="">
                     <a href={link} target="_blank" className="">
                         <img
                             src={`https://www.google.com/s2/favicons?domain=${link}&sz=${128}`} alt="image"

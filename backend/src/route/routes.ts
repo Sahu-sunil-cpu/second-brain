@@ -11,6 +11,7 @@ import bcrypt from "bcrypt";
 import { validateBody, validateContent } from '../validation';
 import mongoose from 'mongoose';
 import { random } from '../utils';
+import { main } from '../vectorModel';
 
 
 const secret = process.env.secret ?? "";
@@ -322,4 +323,12 @@ route.get("/:shareLink", async (req, res) => {
 
 })
 
+route.post("/search", authMiddleware, async (req, res) => {
+  
+  const {generateOutput, content} = await main();
 
+  res.json({
+    Message: generateOutput,
+    content: content
+  })
+})
