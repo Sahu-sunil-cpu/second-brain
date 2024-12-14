@@ -38,9 +38,9 @@ const contentSchema = new Schema({
     title: {
         type: String
     },
-    // tag: {
-    //     type: Types.ObjectId, ref: 'Tag'
-    // },
+    // avatar:[ {
+    //     type: Types.ObjectId, ref: 'Avatar'
+    // }],
     description: {
         type: String,
         require: true
@@ -50,10 +50,12 @@ const contentSchema = new Schema({
     }
 })
 
-const tagSchema = new Schema({
+const avatarSchema = new Schema({
   
     title: String
 })
+
+
 
 
 const linkSchema = new Schema({
@@ -68,7 +70,7 @@ const linkSchema = new Schema({
 
 export const UserModel = model('User', userSchema);
 
-export const TagModel = model('Tag', tagSchema);
+export const avatarModel = model('Avatar', avatarSchema);
 
 export const contentModel = model('Content', contentSchema);
 

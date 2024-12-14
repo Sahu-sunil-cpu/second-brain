@@ -81,7 +81,7 @@ export default function Document({contentAdded, OnContentAdded} : {contentAdded:
               description: string
             }) =>
               <span className="py-8 px-4" >
-                <Card deleteFunction={() => deleteContent(_id.toString())} title={title} type={type} size='lg' variant='primary' description={description} image={Link} />
+                <Card deleteFunction={() => deleteContent(_id.toString())} Id={_id.toString()}  contentAdded={OnContentAdded}   title={title} type={type} size='lg' variant='primary' description={description} image={Link} />
               </span>
             )
           }

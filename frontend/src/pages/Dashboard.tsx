@@ -19,9 +19,6 @@ function Dashboard({contentAdded, OnContentAdded} : {contentAdded: boolean, OnCo
 
   const [Loading, setLoading] = useState(true);
   const [contents, setContents] = useState([]);
-
-
-
   
 
 
@@ -50,6 +47,7 @@ function Dashboard({contentAdded, OnContentAdded} : {contentAdded: boolean, OnCo
 
 
   const deleteContent = async (id: string) => {
+    
     const res = await axios.delete(`${BACKEND_URL}/v1/secondBrain/deleteContent`, {
       data: {
         id
@@ -66,7 +64,7 @@ function Dashboard({contentAdded, OnContentAdded} : {contentAdded: boolean, OnCo
     console.log(res)
 
     setLoading(true);
-
+   
 
   }
 
@@ -90,8 +88,9 @@ function Dashboard({contentAdded, OnContentAdded} : {contentAdded: boolean, OnCo
             _id: string,
             description: string
           }) =>
-            <span className="py-8 px-4" >
-              <Card deleteFunction={() => deleteContent(_id.toString())} title={title} type={type} size='lg' variant='primary' description={description} image={Link} />
+            <span className="py-8 px-4">
+             <button  onClick={() => console.log(_id)}></button>
+              <Card deleteFunction={() => deleteContent(_id.toString())} title={title} type={type} size='lg' variant='primary' description={description} image={Link} Id={_id.toString()} contentAdded={OnContentAdded}/>
             </span>
           )
         }

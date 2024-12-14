@@ -24,11 +24,11 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout setContentAdded={setContentAdded}/>}>
        
-        <Route path='/dashboard' element={<Dashboard contentAdded={contentAdded} OnContentAdded={() => setContentAdded(false)}/>} />
-        <Route path='/video' element={<Video contentAdded={contentAdded} OnContentAdded={() => setContentAdded(false)}/>} />
-        <Route path='/tweet' element={<Tweet contentAdded={contentAdded} OnContentAdded={() => setContentAdded(false)}/>} />
-        <Route path='/document' element={<Document  contentAdded={contentAdded} OnContentAdded={() => setContentAdded(false)}/>} />
-        <Route path='/link' element={<Link  contentAdded={contentAdded} OnContentAdded={() => setContentAdded(false)}/>} />
+        <Route path='/dashboard' element={<Dashboard contentAdded={contentAdded} OnContentAdded={() => setContentAdded(e => !e)}/>} />
+        <Route path='/video' element={<Video contentAdded={contentAdded} OnContentAdded={() => setContentAdded(e => !e)}/>} />
+        <Route path='/tweet' element={<Tweet contentAdded={contentAdded} OnContentAdded={() => setContentAdded(e => !e)}/>} />
+        <Route path='/document' element={<Document  contentAdded={contentAdded} OnContentAdded={() => setContentAdded(e => !e)}/>} />
+        <Route path='/link' element={<Link  contentAdded={contentAdded} OnContentAdded={() => setContentAdded(e => !e)}/>} />
         <Route path="*" element={<NotFound />} />
         </Route>
 

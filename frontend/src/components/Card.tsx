@@ -4,6 +4,8 @@ import { ShareIcon } from "./Icon/Button-Icon/ShareIcon";
 import Button from "./Button";
 import ContentCard from "./ContentCard";
 import { LinkVisit } from "./Icon/LinkVisit";
+import { EditCard } from "./EditCard";
+import { useEffect, useRef, useState } from "react";
 
 type CardVariant = "primary" | "secondary";
 interface CardProps {
@@ -13,8 +15,10 @@ interface CardProps {
     type: string,
     deleteFunction?: () => void,
     size: "sm" | "md" | "lg",
-    variant: CardVariant
-
+    variant: CardVariant,
+    Id: string,
+    contentAdded: () => void;
+    
 }
 
 const sizeVariant = {
@@ -43,10 +47,27 @@ const IconFetcher = (type: string) => {
 
 export default function Card(props: CardProps) {
 
+ const [editOpen, setEditOpen] = useState<boolean>(false);
+//  const IdRef = useRef<string>();
+
+//   IdRef.current = props.Id
+//  console.log(IdRef)
+
+const content = () => {
+  console.log("wrong function")
+}
 
 
+useEffect(() => {
+ props.contentAdded()
+}, [editOpen])
 
-    return <div className={`${styleVariant[props.variant]}`}>
+    return (
+    <>
+        {
+          editOpen && <EditCard EditOpen={editOpen} onClose={() => setEditOpen(e => !e)} Id={props.Id}/>
+        }
+    <div className={`${styleVariant[props.variant]}`}>
         <span className={`${sizeVariant[props.size]} flex flex-col justify-between items-center`} >
 
 
@@ -74,7 +95,7 @@ export default function Card(props: CardProps) {
                     <div className="row-span-1 my-auto flex justify-between items-center" >
                         <div>
                         <Button size="md" variant="tertiary" text="Delete" onClick={props.deleteFunction} />
-                        <Button size="md" variant="secondary" text="Edit" />
+                        <Button size="md" variant="secondary" text="Edit" onClick={() => setEditOpen(e => !e)}/>
                         </div>
 
                         <div>
@@ -103,6 +124,8 @@ export default function Card(props: CardProps) {
             }
         </span>
     </div>
+    </>
+    )
 }
 
 

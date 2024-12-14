@@ -79,6 +79,42 @@ route.post("/addContent", authMiddleware, async (req, res) => {
 
 })
 
+route.post("/edit/",async  (req, res) => {
+   
+  const { success, error } = validateContent.safeParse(req.body);
+
+
+  if (!success) {
+    res.send(error)
+    return;
+  }
+  //@ts-ignore
+  const userId = req.userId;
+
+
+  const { title, description, Id } = req.body;
+
+  console.log( title, description, Id)
+
+ 
+
+  
+  try {
+    const getAndUpdateContent = await contentModel.findByIdAndUpdate(Id, {
+      title: title,
+      description: description
+    })
+
+
+
+    res.send("content updated");
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
+ 
+})
+
 route.post("/login", async (req, res) => {
 
 
@@ -176,7 +212,7 @@ route.delete("/deleteContent", authMiddleware, async (req, res) => {
 
   const {id} = req.body
 
-  
+  console.log("deleteid ------------------->" + id)
   //@ts-ignore
   const userId = req.userId;
   try{

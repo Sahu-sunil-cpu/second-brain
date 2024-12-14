@@ -12,31 +12,28 @@ import { OffCanvas } from "./OffCanvas";
 
 
 
-const colors = ["red", "yellow", "green", "amber", "orange", "blue", "lime", "cyan", "sky", "violet", "purple", "pink"];
+//const colors = ["red", "yellow", "green", "amber", "orange", "blue", "lime", "cyan", "sky", "violet", "purple", "pink"];
 
 
-export function CreateContentModal({ open, onClose, onContentadd }: { open: boolean, onClose: () => void, onContentadd: () => void }) {
+export function EditCard({ EditOpen, onClose, Id}: { EditOpen: boolean, onClose: () => void,  Id: string}) {
   const titleRef = useRef<HTMLInputElement>();
-  const linkRef = useRef<HTMLInputElement>();
  const descriptionRef = useRef<HTMLInputElement>();
-  const [type, setType] = useState<string>();
+//  const [Id, setId] = useState<string>();
 
 
   const addContent = async () => {
 
     const title = titleRef.current?.value;
-    const Link = linkRef.current?.value;
     const description = descriptionRef.current?.value;
-    console.log(description)
+    console.log(description, Id)
    
     // console.log(titleRef.current?.value)
     // console.log(linkRef.current?.value)
     // console.log(typeRef.current?.value)
-    const res = await axios.post(`${BACKEND_URL}/v1/secondBrain/addContent`, {
+    const res = await axios.post(`${BACKEND_URL}/v1/secondBrain/edit`, {
       title,
-      Link,
-      type,
       description,
+      Id
 
     }, {
       headers: {
@@ -49,11 +46,11 @@ export function CreateContentModal({ open, onClose, onContentadd }: { open: bool
 
     onClose();
 
-    onContentadd();
+  
   }
 
   return <div>
-    {open && <div>
+    {EditOpen && <div>
       
             {/* <div onClick={onClose}>
               <CrossIcon />
@@ -61,7 +58,7 @@ export function CreateContentModal({ open, onClose, onContentadd }: { open: bool
 
        
           <div className="">
-            <OffCanvas onClose={onClose}  Open={open}  Title="create" Element={<Input titleref={titleRef} linkref={linkRef} setType={setType} descriptionRef={descriptionRef} addContent={addContent} />
+            <OffCanvas onClose={onClose}  Open={EditOpen}  Title="create" Element={<Input titleref={titleRef}  descriptionRef={descriptionRef} addContent={addContent} />
 } />
           </div>
         </div>
@@ -72,10 +69,10 @@ export function CreateContentModal({ open, onClose, onContentadd }: { open: bool
 }
 
 
-function Input({ linkref, titleref, addContent, setType, descriptionRef}: {
-  linkref: any,
+function Input({ titleref, addContent, descriptionRef}: {
+  
   titleref: any,
-  setType: any,
+ 
   descriptionRef: any,
 
   addContent: () => void,
@@ -88,28 +85,11 @@ function Input({ linkref, titleref, addContent, setType, descriptionRef}: {
       <label htmlFor="title" className="block mb-2 text-md   font-base text-gray-900 dark:text-black">Title</label>
       <input ref={titleref} type="text" id="title" className="bg-gray-50 shadow-inner  ring-blue-500/50    border  text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="e.g. preety photos of cats" required />
     </div>
-    <div className="mb-5">
-      <label htmlFor="link" className="block mb-2   text-md font-base text-gray-900 dark:text-black">Paste your link</label>
-      <input ref={linkref} type="text" id="link" className="bg-gray-50  shadow-inner border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-400 focus:border-blue-400  block w-full p-2.5 " placeholder="e.g. https://example.com/..." required />
-    </div>
+   
 
-
-
-    <label htmlFor="" className="block mb-2 text-md font-base text-gray-900 dark:text-black">Choose link type</label>
-
-    <div className="flex justify-evenly mt-1">
-
-      <OptionButton text={"link"}  setType={setType}/>
-      <OptionButton text={"tweet"} setType={setType} />
-      <OptionButton text={"document"}  setType={setType}/>
-      <OptionButton text={"video"}  setType={setType}/>
-
-
-    </div>
-
-    <label htmlFor="description" className="block mb-2 text-md font-base text-gray-900 ">Your description</label>
+    <label htmlFor="description" className="block mb-2 text-md font-base text-gray-900 ">Your message</label>
     <textarea id="message" 
-     ref={descriptionRef} rows={4}
+     ref={descriptionRef}rows={4}
       className="block p-2.5 w-full text-md caret-blue-500 focus:caret-indigo-500 shadow-inner text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="e.g. this photo is my favorite cat photo and i will buy her soon ..."></textarea>
    
 
@@ -126,6 +106,6 @@ function Input({ linkref, titleref, addContent, setType, descriptionRef}: {
 
 
 
-//  1.  form get submitted on empty data in inputs
+
 
 

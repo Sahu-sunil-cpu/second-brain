@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import { useState } from "react";
 import { CreateContentModal } from "./components/CreateContentModal";
 import SidePan from "./components/SidePan";
+import { SearchCard } from "./components/SearchCard";
 //import ContentCard from "./components/ContentCard";
 
 
@@ -49,7 +50,7 @@ export default function Layout({setContentAdded}: {setContentAdded: any}) {
                             </div>
                         
                         </div>
-                       
+                        <SearchCard/>
                     </div>
                 </div>
             </div >
