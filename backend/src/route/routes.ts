@@ -240,9 +240,9 @@ route.post("/share", authMiddleware, async (req, res) => {
     })
 
     if (User_Link_Exist) {
-      res.send({
-        hash: User_Link_Exist.hash,
-      })
+      res.send(
+       "http://localhost:3000/v1/secondBrain/" +  User_Link_Exist.hash
+      )
 
       return;
     }
@@ -254,9 +254,9 @@ route.post("/share", authMiddleware, async (req, res) => {
       hash: getHash,
     })
 
-    res.json({
-      shareLink: "http://localhost:3000/v1/secondBrain/" + getHash
-    })
+  
+
+    res.send("http://localhost:3000/v1/secondBrain/" + getHash)
   } else {
     await linkModel.deleteOne({
       userId: userId
@@ -350,7 +350,9 @@ route.get("/:shareLink", async (req, res) => {
   })
 
   if (matchLink) {
+    console.log( matchLink.userId)
     const contents = await contentModel.find({ userId: matchLink.userId });
+    console.log(contents)
     res.send(contents);
   } else {
     res.send("brain is not shareable");

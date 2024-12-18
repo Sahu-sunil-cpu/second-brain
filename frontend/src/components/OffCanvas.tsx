@@ -5,7 +5,7 @@ import { PlusIcon } from "./Icon/Button-Icon/PlusIcon";
 
 interface OffCanvasProps {
     Element :ReactElement;
-    Title: string;
+    Title?: string;
     onClose?: () => void;
     Open?: boolean;
 }

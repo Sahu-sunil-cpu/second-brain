@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CreateContentModal } from "./components/CreateContentModal";
 import SidePan from "./components/SidePan";
 import { SearchCard } from "./components/SearchCard";
+import { ShareContent } from "./components/ShareContent";
 //import ContentCard from "./components/ContentCard";
 
 
@@ -13,7 +14,10 @@ export default function Layout({setContentAdded}: {setContentAdded: any}) {
 
     const [modalOpen, setModalOpen] = useState(false);
 
-    const [endpoint, setEndpoint] = useState("contents")
+    const [endpoint, setEndpoint] = useState("contents");
+
+    const [share, onShare] = useState(false);
+
 
 
     return (
@@ -24,6 +28,8 @@ export default function Layout({setContentAdded}: {setContentAdded: any}) {
             }} onContentadd={() => {
                 setContentAdded(true)
             }} />
+
+            <ShareContent share={share} onClose={() => onShare(false)} />
 
             <div className="container bg-gray-100 mx-auto">
 
@@ -39,9 +45,10 @@ export default function Layout({setContentAdded}: {setContentAdded: any}) {
 
                         <div className="grid grid-rows-15  gap-4">
                             <div className="row-span-1 mx-auto ">
-                            <Header onOpen={() => {
-                            setModalOpen(true)
-                        }} />
+                            <Header 
+                            onOpen={() =>  setModalOpen(true)}
+                            onShare={() => onShare(true)}
+                         />
                             </div>
 
 
@@ -75,18 +82,4 @@ export default function Layout({setContentAdded}: {setContentAdded: any}) {
 // import { BACKEND_URL } from '../Config'
 
 
-function Dashboard() {
-
-
-    return (
-        <>
-
-
-
-            {/*  */}
-
-        </>
-    )
-
-}
 
