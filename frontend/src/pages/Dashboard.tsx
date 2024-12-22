@@ -31,12 +31,12 @@ function Dashboard({contentAdded, OnContentAdded} : {contentAdded: boolean, OnCo
         }
       })
 
-      console.log(res)
+      //console.log(res)
       //console.log(Endpoint)
       OnContentAdded();
       setLoading(false);
       setContents(res.data);
-      console.log(contents)
+      //console.log(contents)
     }
 
   }

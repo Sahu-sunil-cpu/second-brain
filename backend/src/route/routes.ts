@@ -28,11 +28,11 @@ route.get("/contents", authMiddleware, async (req, res) => {
 
   //@ts-ignore
   const userId = req.userId;
-  console.log("cjvchj", userId)
+  //console.log("cjvchj", userId)
 
   try {
     const getContents = await contentModel.find({ userId: userId })
-    console.log(getContents)
+    //console.log(getContents)
     res.json(getContents);
   } catch (err) {
     console.log(err);
@@ -350,9 +350,9 @@ route.get("/:shareLink", async (req, res) => {
   })
 
   if (matchLink) {
-    console.log( matchLink.userId)
+    //console.log( matchLink.userId)
     const contents = await contentModel.find({ userId: matchLink.userId });
-    console.log(contents)
+  //  console.log(contents)
     res.send(contents);
   } else {
     res.send("brain is not shareable");
