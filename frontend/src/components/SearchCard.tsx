@@ -6,7 +6,7 @@ import { OffCanvas } from "./OffCanvas"
 export function SearchCard() {
 
 return <div>
-   <OffCanvas Title="update" Element={<UpdateElement/>}/>
+   <OffCanvas location="bottom" Title="update" Element={<UpdateElement/>}/>
 </div>
 }
 

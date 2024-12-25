@@ -8,22 +8,35 @@ interface OffCanvasProps {
     Title?: string;
     onClose?: () => void;
     Open?: boolean;
+    location: "bottom" | "top";
 }
+
+const locationVariant = {
+   "bottom" : "fixed bottom-0 px-16 py-12 right-12 z-40 p-4 overflow-y-auto rounded-t-3xl w-9/12 transition-transform bg-gray-200    grid grid-rows-6 grid-flow-col gap-3",
+   "top": "fixed top-0 px-16 py-12 right-12 z-40 p-4 overflow-y-auto rounded-b-3xl w-9/12 transition-transform bg-gray-200   ${property} grid grid-rows-6 grid-flow-col gap-3",
+
+}
+
+const crossButtonVariany = {
+   "bottom" : "text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white",
+   "top" : "text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute bottom-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white",
+
+}
+
+
+
+
 export function OffCanvas(props: OffCanvasProps) {
       
      const [property, setProperty] = useState("")
      const handleClick = () => {
-      setProperty("translate-y-full")
+      setProperty( props.location == "top" ? "-translate-y-full" :"translate-y-full")
 
       setTimeout(() => {
           //@ts-ignore    fix it
          props.onClose();
       }, 200)
 
-      
-                    
-     
-     
      }
    
      return (
@@ -40,12 +53,12 @@ export function OffCanvas(props: OffCanvasProps) {
    </div> */}
    
    
-   <div id="drawer-bottom-example" className={`fixed bottom-0 px-16 py-12 right-12 z-40 p-4 overflow-y-auto rounded-t-3xl w-9/12 transition-transform bg-gray-200   ${property} grid grid-rows-6 grid-flow-col gap-3`  }  aria-labelledby="drawer-bottom-label">
+   <div id="drawer-bottom-example" className={`${locationVariant[props.location]} + ${property}`  }  aria-labelledby="drawer-bottom-label">
       
        <button type="button" 
           onClick={handleClick}
    
-       data-drawer-hide="drawer-bottom-example" aria-controls="drawer-bottom-example" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >
+       data-drawer-hide="drawer-bottom-example" aria-controls="drawer-bottom-example" className={`${crossButtonVariany[props.location]}`} >
          <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
          </svg>

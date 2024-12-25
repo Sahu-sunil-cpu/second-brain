@@ -30,7 +30,7 @@ export function ShareContent({share, onClose} : {share: boolean, onClose: () => 
     return <>
     {
        share &&  <div className="">
-            <OffCanvas Element={<Input link={link}/>} onClose={onClose} Open={share}/>
+            <OffCanvas location="top" Element={<Input link={link}/>} onClose={onClose} Open={share}/>
 
         </div>
       }

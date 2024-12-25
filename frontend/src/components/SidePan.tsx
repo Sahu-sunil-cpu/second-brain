@@ -85,7 +85,7 @@ export default function SidePan({ setEndpoint }: { setEndpoint: any }) {
                                 title={"Video"}
                                 fontSize='sm'
                                 Icon={
-                                    <VideoIcon size='lg' />
+                                    <VideoIcon size='xl' />
                                 }
                                 setEndpoint={setEndpoint}
                             />

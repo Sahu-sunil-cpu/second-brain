@@ -61,7 +61,7 @@ export function CreateContentModal({ open, onClose, onContentadd }: { open: bool
 
        
           <div className="">
-            <OffCanvas onClose={onClose}  Open={open}  Title="create" Element={<Input titleref={titleRef} linkref={linkRef} setType={setType} descriptionRef={descriptionRef} addContent={addContent} />
+            <OffCanvas onClose={onClose}  Open={open} location="bottom" Title="create" Element={<Input titleref={titleRef} linkref={linkRef} setType={setType} descriptionRef={descriptionRef} addContent={addContent} />
 } />
           </div>
         </div>

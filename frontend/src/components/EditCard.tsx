@@ -58,7 +58,7 @@ export function EditCard({ EditOpen, onClose, Id}: { EditOpen: boolean, onClose:
 
        
           <div className="">
-            <OffCanvas onClose={onClose}  Open={EditOpen}  Title="create" Element={<Input titleref={titleRef}  descriptionRef={descriptionRef} addContent={addContent} />
+            <OffCanvas onClose={onClose} location="bottom"  Open={EditOpen}  Title="create" Element={<Input titleref={titleRef}  descriptionRef={descriptionRef} addContent={addContent} />
 } />
           </div>
         </div>

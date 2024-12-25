@@ -17,8 +17,8 @@ interface CardProps {
     size: "sm" | "md" | "lg",
     variant: CardVariant,
     Id: string,
-    contentAdded: () => void;
-    
+    contentAdded?: () => void;
+
 }
 
 const sizeVariant = {
@@ -47,84 +47,85 @@ const IconFetcher = (type: string) => {
 
 export default function Card(props: CardProps) {
 
- const [editOpen, setEditOpen] = useState<boolean>(false);
-//  const IdRef = useRef<string>();
+    const [editOpen, setEditOpen] = useState<boolean>(false);
+    //  const IdRef = useRef<string>();
 
-//   IdRef.current = props.Id
-//  console.log(IdRef)
+    //   IdRef.current = props.Id
+    //  console.log(IdRef)
 
-const content = () => {
-  console.log("wrong function")
-}
+    const content = () => {
+        console.log("wrong function")
+    }
 
 
-useEffect(() => {
- props.contentAdded()
-}, [editOpen])
+    useEffect(() => {
+        if(props.contentAdded)
+        props.contentAdded()
+    }, [editOpen])
 
     return (
-    <>
-        {
-          editOpen && <EditCard EditOpen={editOpen} onClose={() => setEditOpen(e => !e)} Id={props.Id}/>
-        }
-    <div className={`${styleVariant[props.variant]}`}>
-        <span className={`${sizeVariant[props.size]} flex flex-col justify-between items-center`} >
+        <>
+            {
+                editOpen && <EditCard EditOpen={editOpen} onClose={() => setEditOpen(e => !e)} Id={props.Id} />
+            }
+            <div className={`${styleVariant[props.variant]}`}>
+                <span className={`${sizeVariant[props.size]} flex flex-col justify-between items-center`} >
 
 
-            {/* making tabs for specific type i.e. video, image, doc, tweet so there is no need
+                    {/* making tabs for specific type i.e. video, image, doc, tweet so there is no need
  to add icons anymore
 
  removing tags and share icon and delete icon into new ui/ux */}
 
-            
-            {
-                props.type != "tweet" && <div className="grid grid-rows-4 grid-flow-col gap-3">
-                    <div className="row-span-3">
-                        <div className="grid grid-cols-4 grid-flow-col gap-1">
-                            <div className="col-span-1">
+
+                    {
+                        props.type != "tweet" && <div className="grid grid-rows-4 grid-flow-col gap-3">
+                            <div className="row-span-3">
+                                <div className="grid grid-cols-4 grid-flow-col gap-1">
+                                    <div className="col-span-1">
+                                        <SelectContent type={props.type} link={props.image || "http://localhost:5173/dashboard"} />
+                                    </div>
+                                    <div className="col-span-3">
+                                        {
+                                            <ContentCard title={props.title} description={props.description} />
+                                            //<Video link={props.image || ""} />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row-span-1 my-auto flex justify-between items-center " >
+                                <div>
+                                    <Button size="md" variant="tertiary" text="Delete" onClick={props.deleteFunction} />
+                                    <Button size="md" variant="secondary" text="Edit" onClick={() => setEditOpen(e => !e)} />
+                                </div>
+
+                                <div>
+                                    <a href={props.image} target="_blank">
+                                        <LinkVisit size="xl" />
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+
+                    {
+                        props.type == "tweet" && <div className="">
+                            <div className="">
                                 <SelectContent type={props.type} link={props.image || "http://localhost:5173/dashboard"} />
+
                             </div>
-                            <div className="col-span-3">
-                                {
-                               <ContentCard title={props.title} description={props.description}/>
-                            //<Video link={props.image || ""} />
-                                }
+
+                            <div className="row-span-1 my-auto">
+                                <Button size="md" variant="tertiary" text="Delete" onClick={props.deleteFunction} />
+                                <Button size="md" variant="secondary" text="Edit" />
+
                             </div>
                         </div>
-                    </div>
-                    <div className="row-span-1 my-auto flex justify-between items-center" >
-                        <div>
-                        <Button size="md" variant="tertiary" text="Delete" onClick={props.deleteFunction} />
-                        <Button size="md" variant="secondary" text="Edit" onClick={() => setEditOpen(e => !e)}/>
-                        </div>
-
-                        <div>
-                            <a href={props.image} target="_blank"> 
-                            <LinkVisit size="xl"  />
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-            }
-
-            {
-                props.type == "tweet" && <div className="">
-                    <div className="">
-                        <SelectContent type={props.type} link={props.image || "http://localhost:5173/dashboard"} />
-
-                    </div>
-
-                    <div className="row-span-1 my-auto">
-                        <Button size="md" variant="tertiary" text="Delete" onClick={props.deleteFunction} />
-                        <Button size="md" variant="secondary" text="Edit" />
-
-                    </div>
-                </div>
-            }
-        </span>
-    </div>
-    </>
+                    }
+                </span>
+            </div>
+        </>
     )
 }
 
@@ -132,9 +133,9 @@ useEffect(() => {
 
 
 
-function SelectContent({ type, link }: { type: string, link: string }) {
+export function SelectContent({ type, link }: { type: string, link: string }) {
 
-   
+
 
 
     return <div>
@@ -157,11 +158,11 @@ function SelectContent({ type, link }: { type: string, link: string }) {
 
             }
 
-          
+
 
 
             {
-                type  != "tweet" &&  <div className="">
+                type != "tweet" && <div className="">
                     <a href={link} target="_blank" className="">
                         <img
                             src={`https://www.google.com/s2/favicons?domain=${link}&sz=${128}`} alt="image"
@@ -174,13 +175,13 @@ function SelectContent({ type, link }: { type: string, link: string }) {
                 </div>
             }
 
-           
+
         </div>
     </div>
 }
 
 
-function Video({link} : {link: string}) {
+function Video({ link }: { link: string }) {
 
     const getYouTubeVideoId = (url: string) => {
         const videoId = url.split('v=')[1]
@@ -194,20 +195,20 @@ function Video({link} : {link: string}) {
 
     return <div>
         <div className="aspect-video mb-4 ">
-                    <iframe
-                        // ref={videoRef}
-                        width="100%"
-                        height="100%"
-                        src={`https://www.youtube.com/embed/${getYouTubeVideoId(link)}?autoplay=0&rel=0&controls=1&enable`}
-                        title="YouTube video player"
-                        frameBorder="0"
-                      
+            <iframe
+                // ref={videoRef}
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${getYouTubeVideoId(link)}?autoplay=0&rel=0&controls=1&enable`}
+                title="YouTube video player"
+                frameBorder="0"
 
-                        allow="accelerometer;  autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    //  allowFullScreen="0"
 
-                    ></iframe>
-                </div>
+                allow="accelerometer;  autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            //  allowFullScreen="0"
+
+            ></iframe>
+        </div>
     </div>
 }
 
