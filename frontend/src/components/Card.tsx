@@ -1,11 +1,10 @@
-import { Tab } from "./Tab";
-import { DocIcon, LinkIcon, TweetIcon, VideoIcon, DeleteIcon } from "./Icon/Tab-Icon/TabIcons";
-import { ShareIcon } from "./Icon/Button-Icon/ShareIcon";
+
+
 import Button from "./Button";
 import ContentCard from "./ContentCard";
 import { LinkVisit } from "./Icon/LinkVisit";
 import { EditCard } from "./EditCard";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 type CardVariant = "primary" | "secondary";
 interface CardProps {
@@ -33,34 +32,17 @@ const styleVariant = {
 }
 
 
-const IconFetcher = (type: string) => {
-    if (type == "link") {
-        return <LinkIcon size="lg" />
-    } else if (type == "document") {
-        return <DocIcon size='lg' />
-    } else if (type == "video") {
-        return <VideoIcon size="lg" />
-    } else {
-        return <TweetIcon size="lg" />
-    }
-}
+
 
 export default function Card(props: CardProps) {
 
     const [editOpen, setEditOpen] = useState<boolean>(false);
-    //  const IdRef = useRef<string>();
-
-    //   IdRef.current = props.Id
-    //  console.log(IdRef)
-
-    const content = () => {
-        console.log("wrong function")
-    }
+  
 
 
     useEffect(() => {
-        if(props.contentAdded)
-        props.contentAdded()
+        if (props.contentAdded)
+            props.contentAdded()
     }, [editOpen])
 
     return (
@@ -181,34 +163,34 @@ export function SelectContent({ type, link }: { type: string, link: string }) {
 }
 
 
-function Video({ link }: { link: string }) {
+// function Video({ link }: { link: string }) {
 
-    const getYouTubeVideoId = (url: string) => {
-        const videoId = url.split('v=')[1]
-        const ampersandPosition = videoId.indexOf('&')
-        if (ampersandPosition !== -1) {
-            return videoId.substring(0, ampersandPosition)
-        }
-        console.log(videoId)
-        return videoId
-    }
+//     const getYouTubeVideoId = (url: string) => {
+//         const videoId = url.split('v=')[1]
+//         const ampersandPosition = videoId.indexOf('&')
+//         if (ampersandPosition !== -1) {
+//             return videoId.substring(0, ampersandPosition)
+//         }
+//         console.log(videoId)
+//         return videoId
+//     }
 
-    return <div>
-        <div className="aspect-video mb-4 ">
-            <iframe
-                // ref={videoRef}
-                width="100%"
-                height="100%"
-                src={`https://www.youtube.com/embed/${getYouTubeVideoId(link)}?autoplay=0&rel=0&controls=1&enable`}
-                title="YouTube video player"
-                frameBorder="0"
+//     return <div>
+//         <div className="aspect-video mb-4 ">
+//             <iframe
+//                 // ref={videoRef}
+//                 width="100%"
+//                 height="100%"
+//                 src={`https://www.youtube.com/embed/${getYouTubeVideoId(link)}?autoplay=0&rel=0&controls=1&enable`}
+//                 title="YouTube video player"
+//                 frameBorder="0"
 
 
-                allow="accelerometer;  autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            //  allowFullScreen="0"
+//                 allow="accelerometer;  autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+//             //  allowFullScreen="0"
 
-            ></iframe>
-        </div>
-    </div>
-}
+//             ></iframe>
+//         </div>
+//     </div>
+// }
 

@@ -3,7 +3,6 @@ import './App.css'
 import Dashboard from './pages/Dashboard'
 import Signin from './pages/Signin';
 import Signup from './pages/Signup'
-import Logout from './pages/Signup'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Video from './pages/Video';
 import Tweet from './pages/Tweet';

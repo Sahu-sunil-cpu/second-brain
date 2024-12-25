@@ -55,11 +55,11 @@ route.post("/addContent", authMiddleware, async (req, res) => {
   const userId = req.userId;
 
 
-  const { Link, title, type, description} = req.body;
+  const { Link, title, type, description } = req.body;
 
-  console.log(Link, title, type,description )
+  console.log(Link, title, type, description)
 
- 
+
 
 
   try {
@@ -79,8 +79,8 @@ route.post("/addContent", authMiddleware, async (req, res) => {
 
 })
 
-route.post("/edit/",async  (req, res) => {
-   
+route.post("/edit/", async (req, res) => {
+
   const { success, error } = validateContent.safeParse(req.body);
 
 
@@ -94,11 +94,11 @@ route.post("/edit/",async  (req, res) => {
 
   const { title, description, Id } = req.body;
 
-  console.log( title, description, Id)
+  console.log(title, description, Id)
 
- 
 
-  
+
+
   try {
     const getAndUpdateContent = await contentModel.findByIdAndUpdate(Id, {
       title: title,
@@ -112,7 +112,7 @@ route.post("/edit/",async  (req, res) => {
     console.log(err);
     res.json(err);
   }
- 
+
 })
 
 route.post("/login", async (req, res) => {
@@ -128,7 +128,7 @@ route.post("/login", async (req, res) => {
   //@ts-ignore 
   const userId = req.userId;
 
-  const { name, password, mail} = req.body;
+  const { name, password, mail } = req.body;
 
   const response = await UserModel.findOne({ name: name });
 
@@ -210,16 +210,16 @@ route.post("/signup", async (req, res) => {
 
 route.delete("/deleteContent", authMiddleware, async (req, res) => {
 
-  const {id} = req.body
+  const { id } = req.body
 
   console.log("deleteid ------------------->" + id)
   //@ts-ignore
   const userId = req.userId;
-  try{
-  const content = await contentModel.findByIdAndDelete(id)
+  try {
+    const content = await contentModel.findByIdAndDelete(id)
 
-  res.send(content)
-  }catch(err) {
+    res.send(content)
+  } catch (err) {
     console.log(err)
     res.send(err)
   }
@@ -241,20 +241,20 @@ route.post("/share", authMiddleware, async (req, res) => {
 
     if (User_Link_Exist) {
       res.send(
-       "http://localhost:3000/v1/secondBrain/" +  User_Link_Exist.hash
+        "http://localhost:3000/v1/secondBrain/" + User_Link_Exist.hash
       )
 
       return;
     }
 
-   const getHash = random(10);
+    const getHash = random(10);
 
     await linkModel.create({
       userId: userId,
       hash: getHash,
     })
 
-  
+
 
     res.send("http://localhost:3000/v1/secondBrain/" + getHash)
   } else {
@@ -265,7 +265,7 @@ route.post("/share", authMiddleware, async (req, res) => {
     res.json("you have disabled shareing your brain")
   }
 
- 
+
 
 
 })
@@ -281,8 +281,8 @@ route.get("/content/video", authMiddleware, async (req, res) => {
 
 
   try {
-    const videos = await contentModel.find({type: "video"})
-        console.log(videos)
+    const videos = await contentModel.find({ type: "video" })
+    console.log(videos)
     res.json(videos);
   } catch (err) {
     console.log(err);
@@ -297,8 +297,8 @@ route.get("/content/document", authMiddleware, async (req, res) => {
 
 
   try {
-    const videos = await contentModel.find({type: "document"})
-        console.log(videos)
+    const videos = await contentModel.find({ type: "document" })
+    console.log(videos)
     res.json(videos);
   } catch (err) {
     console.log(err);
@@ -315,8 +315,8 @@ route.get("/content/tweet", authMiddleware, async (req, res) => {
 
 
   try {
-    const videos = await contentModel.find({type: "tweet"})
-        console.log(videos)
+    const videos = await contentModel.find({ type: "tweet" })
+    console.log(videos)
     res.json(videos);
   } catch (err) {
     console.log(err);
@@ -331,8 +331,8 @@ route.get("/content/link", authMiddleware, async (req, res) => {
 
 
   try {
-    const videos = await contentModel.find({type: "link"})
-        console.log(videos)
+    const videos = await contentModel.find({ type: "link" })
+    console.log(videos)
     res.json(videos);
   } catch (err) {
     console.log(err);
@@ -352,7 +352,7 @@ route.get("/:shareLink", async (req, res) => {
   if (matchLink) {
     //console.log( matchLink.userId)
     const contents = await contentModel.find({ userId: matchLink.userId });
-  //  console.log(contents)
+    //  console.log(contents)
     res.send(contents);
   } else {
     res.send("brain is not shareable");
@@ -362,8 +362,8 @@ route.get("/:shareLink", async (req, res) => {
 })
 
 route.post("/search", authMiddleware, async (req, res) => {
-  
-  const {generateOutput, content} = await main();
+
+  const { generateOutput, content } = await main();
 
   res.json({
     Message: generateOutput,
