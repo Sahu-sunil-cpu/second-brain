@@ -1,15 +1,16 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import { useState } from "react";
 import { CreateContentModal } from "./components/CreateContentModal";
 import SidePan from "./components/SidePan";
 import { SearchCard } from "./components/SearchCard";
 import { ShareContent } from "./components/ShareContent";
+import { SearchIcon } from "./components/Icon/Search-Icon";
 //import ContentCard from "./components/ContentCard";
 
 
 
-export default function Layout({setContentAdded}: {setContentAdded: any}) {
+export default function Layout({ setContentAdded }: { setContentAdded: any }) {
 
 
     const [modalOpen, setModalOpen] = useState(false);
@@ -29,6 +30,14 @@ export default function Layout({setContentAdded}: {setContentAdded: any}) {
                 setContentAdded(true)
             }} />
 
+
+            <Link to="/searchBrain">
+                <div className="fixed bottom-12 right-12 cursor-pointer  p-3.5 border rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg shadow-cyan-500/50 hover:mb-2 duration-500">
+                    <SearchIcon />
+                </div>
+            </Link>
+
+
             <ShareContent share={share} onClose={() => onShare(false)} />
 
             <div className="container bg-gray-100 mx-auto">
@@ -45,26 +54,26 @@ export default function Layout({setContentAdded}: {setContentAdded: any}) {
 
                         <div className="grid grid-rows-15  gap-4">
                             <div className="row-span-1 mx-auto ">
-                            <Header 
-                            onOpen={() =>  setModalOpen(true)}
-                            onShare={() => onShare(true)}
-                         />
+                                <Header
+                                    onOpen={() => setModalOpen(true)}
+                                    onShare={() => onShare(true)}
+                                />
                             </div>
 
 
                             <div className="row-span-14">
-                            <Outlet />
+                                <Outlet />
                             </div>
-                        
+
                         </div>
-                        <SearchCard/>
+                        <SearchCard />
                     </div>
                 </div>
             </div >
 
 
 
-         
+
         </>
     )
 }

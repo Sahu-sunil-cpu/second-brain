@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import 'dotenv/config'
 
 
-const secret = process.env.secret;
+const secret = process.env.secret ;
 console.log(secret);
 
 

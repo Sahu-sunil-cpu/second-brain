@@ -12,6 +12,7 @@ import Layout from './Layout';
 import NotFound from './pages/NotFound';
 import { useState } from 'react';
 import { Share } from './pages/Share';
+import { SearchPage } from './pages/SearchPage';
 
 
 function App() {
@@ -34,7 +35,9 @@ function App() {
 
         <Route path='/signup' element={<Signup />} />
         <Route path='/signin' element={<Signin />} />
-        <Route path='/:share' element={<Share />} />
+        {/* <Route path='/:share' element={<Share />} /> */}
+        <Route path='/searchBrain' element={<SearchPage />} />
+
       </Routes>
     </BrowserRouter>
 
