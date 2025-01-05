@@ -6,7 +6,6 @@ interface TabProps {
     onClick?: () => void;
     Icon: ReactElement;
     fontSize: "sm" | "md" | "lg";
-    setEndpoint: any;
 }
 
 const fontSize = {
@@ -18,7 +17,7 @@ const fontSize = {
 
 export function Tab(props: TabProps) {
 
-    return <div className="flex items-center hover:bg-gray-200 rounded-md cursor-pointer" onClick={() => props.setEndpoint(props.title)}>
+    return <div className="flex items-center hover:bg-gray-200 rounded-md cursor-pointer" >
          <div className="my-1 ml-1">
         {props.Icon}
         </div>

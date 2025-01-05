@@ -15,7 +15,6 @@ export default function Layout({ setContentAdded }: { setContentAdded: any }) {
 
     const [modalOpen, setModalOpen] = useState(false);
 
-    const [endpoint, setEndpoint] = useState("contents");
 
     const [share, onShare] = useState(false);
 
@@ -47,7 +46,7 @@ export default function Layout({ setContentAdded }: { setContentAdded: any }) {
 
 
                     <div className='col-span-1 '>
-                        <SidePan setEndpoint={setEndpoint} />
+                        <SidePan  />
                     </div>
 
                     <div className="col-span-4">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { OffCanvas } from "./OffCanvas"
 import axios from "axios";
-import { BACKEND_URL } from "../Config";
+import { BACKEND_URL, CURRENT_URL } from "../Config";
 
 
 export function ShareContent({share, onClose} : {share: boolean, onClose: () => void}) {
@@ -19,9 +19,9 @@ export function ShareContent({share, onClose} : {share: boolean, onClose: () => 
   
       })
   
-      console.log(res.data);
-  
-      setLink(res.data);
+      console.log(res);
+      const url = `${CURRENT_URL}/${res.data}`
+      setLink(url);
     }
 
     useEffect(() => {

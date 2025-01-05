@@ -13,7 +13,7 @@ import { UserProfile } from "./UserProfile";
 
 
 
-export default function SidePan({ setEndpoint }: { setEndpoint: any }) {
+export default function SidePan() {
 
     const navigate = useNavigate()
 
@@ -35,11 +35,7 @@ export default function SidePan({ setEndpoint }: { setEndpoint: any }) {
             </div> 
                
                 <ul className="flex flex-col justify-evenly space-y-4 mb-80 relative bottom-12">
-                    <li >
-
-
-
-
+                    <li>
                         <Link to="/link">
                             <Tab
                                 title={"Link"}
@@ -48,21 +44,20 @@ export default function SidePan({ setEndpoint }: { setEndpoint: any }) {
                                     <LinkIcon size='lg' />
 
                                 }
-                                setEndpoint={setEndpoint}
+                                
                             />
                         </Link>
                     </li>
 
                     <li >
-
-                        <Link to="/tweet">
+                          <Link to="/tweet">
                             <Tab
                                 title={"Tweet"}
                                 fontSize='sm'
                                 Icon={
                                     <TweetIcon size='lg' />
                                 }
-                                setEndpoint={setEndpoint}
+                                
                             />
                         </Link>
                     </li>
@@ -75,7 +70,7 @@ export default function SidePan({ setEndpoint }: { setEndpoint: any }) {
                                 Icon={
                                     <DocIcon size='lg' />
                                 }
-                                setEndpoint={setEndpoint}
+                                
                             />
                         </Link>
                     </li>
@@ -87,7 +82,7 @@ export default function SidePan({ setEndpoint }: { setEndpoint: any }) {
                                 Icon={
                                     <VideoIcon size='xl' />
                                 }
-                                setEndpoint={setEndpoint}
+                                
                             />
                         </Link>
                     </li>

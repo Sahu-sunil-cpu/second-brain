@@ -3,7 +3,7 @@ import './App.css'
 import Dashboard from './pages/Dashboard'
 import Signin from './pages/Signin';
 import Signup from './pages/Signup'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Video from './pages/Video';
 import Tweet from './pages/Tweet';
 import Document from './pages/Document';
@@ -18,7 +18,7 @@ import { SearchPage } from './pages/SearchPage';
 function App() {
   const [contentAdded, setContentAdded] = useState(false);
 
-
+  
 
   return (
     <BrowserRouter>
@@ -35,7 +35,7 @@ function App() {
 
         <Route path='/signup' element={<Signup />} />
         <Route path='/signin' element={<Signin />} />
-        {/* <Route path='/:share' element={<Share />} /> */}
+        <Route path='/:share' element={<Share />} />
         <Route path='/searchBrain' element={<SearchPage />} />
 
       </Routes>

@@ -28,11 +28,9 @@ route.get("/contents", authMiddleware, async (req, res) => {
 
   //@ts-ignore
   const userId = req.userId;
-  //console.log("cjvchj", userId)
 
   try {
     const getContents = await contentModel.find({ userId: userId })
-    //console.log(getContents)
     res.json(getContents);
   } catch (err) {
     console.log(err);
@@ -125,10 +123,9 @@ route.post("/login", async (req, res) => {
     return;
   }
 
-  //@ts-ignore 
-  const userId = req.userId;
 
-  const { name, password, mail } = req.body;
+
+  const { name, password } = req.body;
 
   const response = await UserModel.findOne({ name: name });
 
@@ -139,20 +136,24 @@ route.post("/login", async (req, res) => {
     return;
   }
 
-  /// password   verifying
 
   const passwordMatch = await bcrypt.compare(password, response.password ?? "")
 
   if (passwordMatch) {
 
-    const id = response._id.toString();
-    //  console.log("-------->",userEntry._id.toString(),"---->", secret)
+
+    try {
+      const id = response._id.toString();
 
 
-    const JWT = jwt.sign(id, secret)
-    res.json({
-      "token": JWT
-    })
+      const JWT = jwt.sign(id, secret)
+      res.json({
+        "token": JWT
+      })
+    } catch (err) {
+      console.error(err);
+    }
+
   } else {
     res.sendStatus(404).json({
       "message": "you are not signed up, please signup first",
@@ -232,6 +233,7 @@ route.post("/share", authMiddleware, async (req, res) => {
   const userId = req.userId;
 
 
+
   if (share) {
 
 
@@ -240,8 +242,9 @@ route.post("/share", authMiddleware, async (req, res) => {
     })
 
     if (User_Link_Exist) {
+      console.log("----------------------")
       res.send(
-        "http://localhost:3000/v1/secondBrain/" + User_Link_Exist.hash
+         User_Link_Exist.hash
       )
 
       return;
@@ -256,7 +259,7 @@ route.post("/share", authMiddleware, async (req, res) => {
 
 
 
-    res.send("http://localhost:3000/v1/secondBrain/" + getHash)
+    res.send(getHash)
   } else {
     await linkModel.deleteOne({
       userId: userId
@@ -278,11 +281,13 @@ route.post("/share", authMiddleware, async (req, res) => {
  */
 route.get("/content/video", authMiddleware, async (req, res) => {
 
+ //@ts-ignore
+ const userId = req.userId;
 
 
   try {
-    const videos = await contentModel.find({ type: "video" })
-    console.log(videos)
+    const videos = await contentModel.find({ type: "video" , userId: userId})
+  //  console.log(videos)
     res.json(videos);
   } catch (err) {
     console.log(err);
@@ -294,11 +299,13 @@ route.get("/content/video", authMiddleware, async (req, res) => {
 
 route.get("/content/document", authMiddleware, async (req, res) => {
 
+ //@ts-ignore
+ const userId = req.userId;
 
 
   try {
-    const videos = await contentModel.find({ type: "document" })
-    console.log(videos)
+    const videos = await contentModel.find({ type: "document" , userId: userId})
+   // console.log(videos)
     res.json(videos);
   } catch (err) {
     console.log(err);
@@ -312,11 +319,13 @@ route.get("/content/document", authMiddleware, async (req, res) => {
 
 route.get("/content/tweet", authMiddleware, async (req, res) => {
 
+ //@ts-ignore
+ const userId = req.userId;
 
 
   try {
-    const videos = await contentModel.find({ type: "tweet" })
-    console.log(videos)
+    const videos = await contentModel.find({ type: "tweet", userId: userId })
+   // console.log(videos)
     res.json(videos);
   } catch (err) {
     console.log(err);
@@ -327,12 +336,14 @@ route.get("/content/tweet", authMiddleware, async (req, res) => {
 })
 
 route.get("/content/link", authMiddleware, async (req, res) => {
+ //@ts-ignore
+ const userId = req.userId;
 
 
 
   try {
-    const videos = await contentModel.find({ type: "link" })
-    console.log(videos)
+    const videos = await contentModel.find({ type: "link", userId: userId })
+  //  console.log(videos)
     res.json(videos);
   } catch (err) {
     console.log(err);

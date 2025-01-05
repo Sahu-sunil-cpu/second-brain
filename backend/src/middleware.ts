@@ -10,7 +10,7 @@ console.log(secret);
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const headers = req.headers['authorization'];
-    console.log(headers as string)
+  //  console.log(headers as string)
 
     const decode = jwt.verify(headers as string, secret as string);
  

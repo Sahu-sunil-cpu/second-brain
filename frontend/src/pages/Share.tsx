@@ -3,6 +3,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../Config";
 import { useEffect, useState } from "react";
 import ShareCard from "../components/ShareCard";
+import { Logo } from "../components/Logo";
 
 
 
@@ -52,6 +53,9 @@ export function Share() {
     }
     return <div className="container bg-gray-100 mx-auto">
 
+  <div className="fixed left-4 bottom-4">
+            <Logo name='Second Brain' size='sm' />
+        </div>
 
         <div className='grid grid-cols-6 gap-4'>
 
@@ -66,7 +70,7 @@ export function Share() {
                         _id: string,
                         description: string
                     }) =>
-                        <span className="py-8 px-4">
+                        <span className=" px-4 ">
                             <button onClick={() => console.log(_id)}></button>
                             <ShareCard title={title} type={type} size='lg' variant='primary' description={description} image={Link} />
                         </span>
