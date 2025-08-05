@@ -29,7 +29,7 @@ SecondBrain is a full-stack web application that allows users to easily save, or
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/secondbrain.git
+git clone https://github.com/Sahu-sunil-cpu/second-brain.git
 cd secondbrain
 cd server
 npm install
@@ -38,4 +38,5 @@ npm start
 cd client
 npm install
 npm run dev
+
 
