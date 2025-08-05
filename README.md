@@ -23,6 +23,8 @@ SecondBrain is a full-stack web application that allows users to easily save, or
   - **Frontend**: React.js, TailwindCSS
   - **Backend**: Node.js, Express.js
   - **Database**: MongoDB (Mongoose)
+---
+[![Demo](https://img.youtube.com/vi/i1FJ9YOopIQ/0.jpg)](https://www.youtube.com/watch?v=i1FJ9YOopIQ)
 
 
 ## 🛠️ Installation
@@ -37,6 +39,7 @@ npm run dev
 cd frontend
 npm install
 npm run dev
+
 
 
 
