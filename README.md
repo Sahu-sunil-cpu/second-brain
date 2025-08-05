@@ -30,15 +30,15 @@ SecondBrain is a full-stack web application that allows users to easily save, or
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/Sahu-sunil-cpu/second-brain.git
-```bash
+```
 cd backend
 npm install
 # Create a `.env` file and add your MongoDB URI and JWT secret
 npm run dev
-```bash
 cd frontend
 npm install
 npm run dev
+
 
 
 
