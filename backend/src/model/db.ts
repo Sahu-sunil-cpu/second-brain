@@ -4,7 +4,7 @@ import mongoose from "mongoose"
 
 
 const main = async () => {
-    await mongoose.connect('mongodb+srv://sunilsahu21633:sunil04345@secondbrain.alydi.mongodb.net/?retryWrites=true&w=majority&appName=secondbrain');
+    await mongoose.connect('mongodb+srv://ironman97158_db_user:2pYY9vS6iRfOmup5@cluster0.ssgtbza.mongodb.net');
    // await mongoose.connect('mongodb://localhost:27017/secondBrain')
 }
 
